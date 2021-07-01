@@ -13,5 +13,27 @@ namespace BalancedBracketsTests
         {
             Assert.AreEqual(true, true);
         }
+
+        [TestMethod]
+        public void OnlyBracketsReturnTrue()
+        {
+            Assert.IsTrue(BalancedBrackets.HasBalancedBrackets("[]"));
+            Assert.IsTrue(BalancedBrackets.HasBalancedBrackets(""));
+            Assert.IsTrue(BalancedBrackets.HasBalancedBrackets(" "));
+            Assert.IsTrue(BalancedBrackets.HasBalancedBrackets("a"));
+            Assert.IsTrue(BalancedBrackets.HasBalancedBrackets("[a]"));
+            Assert.IsTrue(BalancedBrackets.HasBalancedBrackets("[a][]"));
+            Assert.IsTrue(BalancedBrackets.HasBalancedBrackets("[L[a]unch[Code]]"));
+            
+            Assert.IsFalse(BalancedBrackets.HasBalancedBrackets("["));
+            Assert.IsFalse(BalancedBrackets.HasBalancedBrackets("]"));
+            Assert.IsFalse(BalancedBrackets.HasBalancedBrackets("]["));
+            Assert.IsFalse(BalancedBrackets.HasBalancedBrackets("[]a]["));
+            Assert.IsFalse(BalancedBrackets.HasBalancedBrackets("Launch]Code["));
+            Assert.IsFalse(BalancedBrackets.HasBalancedBrackets("[LaunchCode"));
+            Assert.IsFalse(BalancedBrackets.HasBalancedBrackets("[La[unch][Code]"));
+
+
+        }
     }
 }

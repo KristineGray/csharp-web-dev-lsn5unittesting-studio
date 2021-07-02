@@ -48,10 +48,42 @@ namespace BalancedBracketsNS
                 }
                 
             }
+            int listLength = bracketsList.Count;
+            char[] firstAndLast = new char[2] { '[', ']' };
+            if (listLength >= 2)
+            {
+                firstAndLast.SetValue(bracketsList[0], 0);
+                firstAndLast.SetValue(bracketsList[listLength - 1], 1);
+            }
+            List<bool> pairChecks = new List<bool>();
+            if (openBracket == closedBracket && openBracket > 2)
+            {
+                for (int i = 0; i < closedBracket; i++)
+                {
+                    int closeIndex = bracketsList.IndexOf(']');
+                    int openIndex = bracketsList.LastIndexOf('[', closeIndex);
+                    if (closeIndex == -1 || openIndex == -1)
+                    {
+                        pairChecks.Add(false);
+                    }
+                    else
+                    {
+                        
+                        if (closeIndex < openIndex) pairChecks.Add(false);
+                        else pairChecks.Add(true);
+                        bracketsList.RemoveAt(closeIndex);
+                        bracketsList.RemoveAt(openIndex);
+                    }
+                        
+                }
+            }
 
-            if (bracketsList.Count == 0)
+            if (listLength == 0)
                 return true;
-            else return brackets == 0 && openBracket == closedBracket && bracketsList[0] != ']' && bracketsList[^1] != '[';
+            else
+            {
+                return brackets == 0 && openBracket == closedBracket && firstAndLast[0] != ']' && firstAndLast[1] != '[' && !pairChecks.Contains(false);
+            }
         }
     }
 }
